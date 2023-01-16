@@ -22,7 +22,7 @@ const trueArray = (array: string[]) => {
   );
 };
 
-export const handleErrorServer = async (
+export const serverError = async (
   req: IncomingMessage,
   res: ServerResponse
 ) => {
@@ -38,7 +38,7 @@ export const handleErrorServer = async (
   }
 };
 
-export const errorNotFoundUser = async (
+export const notFoundError = async (
   req: IncomingMessage,
   res: ServerResponse
 ) => {
@@ -46,7 +46,7 @@ export const errorNotFoundUser = async (
     res.writeHead(404, { "Content-Type": "application/json" });
     res.end(JSON.stringify("The user was not found."));
   } catch (error) {
-    handleErrorServer(req, res);
+	serverError(req, res);
   }
 };
 
@@ -57,7 +57,7 @@ export const getUsers = async (req: IncomingMessage, res: ServerResponse) => {
     res.writeHead(200, { "Content-Type": "application/json" });
     res.end(JSON.stringify(users));
   } catch (error) {
-    handleErrorServer(req, res);
+	serverError(req, res);
   }
 };
 
@@ -69,13 +69,13 @@ export const getUserId = async (
   try {
     const user = await findById(id);
     if (!user) {
-      errorNotFoundUser(req, res);
+      notFoundError(req, res);
     } else {
       res.writeHead(200, { "Content-Type": "application/json" });
       res.end(JSON.stringify(user));
     }
   } catch (error) {
-    errorNotFoundUser(req, res);
+	notFoundError(req, res);
   }
 };
 
@@ -100,7 +100,7 @@ export const createUser = async (req: IncomingMessage, res: ServerResponse) => {
     res.writeHead(400, { "Content-Type": "application/json" });
     res.end(JSON.stringify("Not all required fields have been completed"));
   } catch (error) {
-    handleErrorServer(req, res);
+	serverError(req, res);
   }
   return ServerResponse;
 };
@@ -113,7 +113,7 @@ export const updateUser = async (
   try {
     const user = await findById(id);
     if (!user) {
-      errorNotFoundUser(req, res);
+      notFoundError(req, res);
     } else {
       const body = await userData(req);
       const { username, age, hobbies } = JSON.parse(body);
@@ -137,7 +137,7 @@ export const updateUser = async (
       );
     }
   } catch (error) {
-    errorNotFoundUser(req, res);
+	notFoundError(req, res);
   }
   return ServerResponse;
 };
@@ -150,14 +150,14 @@ export const deleteUser = async (
   try {
     const user = await findById(id);
     if (!user) {
-      errorNotFoundUser(req, res);
+      notFoundError(req, res);
     } else {
       await remove(id);
       res.writeHead(204, { "Content-Type": "application/json" });
       res.end();
     }
   } catch (error) {
-    errorNotFoundUser(req, res);
+	notFoundError(req, res);
   }
 };
 
@@ -169,11 +169,11 @@ export const errorValidId = async (
     res.writeHead(400, { "Content-Type": "application/json" });
     res.end(JSON.stringify("The ID you entered is not valid."));
   } catch (error) {
-    handleErrorServer(req, res);
+	serverError(req, res);
   }
 };
 
-export const errorRouteNotFound = async (
+export const errorAdsress = async (
   req: IncomingMessage,
   res: ServerResponse
 ) => {
@@ -181,6 +181,6 @@ export const errorRouteNotFound = async (
     res.writeHead(404, { "Content-Type": "application/json" });
     res.end(JSON.stringify("This request address does not exist"));
   } catch (error) {
-    handleErrorServer(req, res);
+	serverError(req, res);
   }
 };

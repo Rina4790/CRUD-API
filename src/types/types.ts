@@ -1,5 +1,3 @@
-
-
 export interface IUserPost {
   username: string;
   age: number;

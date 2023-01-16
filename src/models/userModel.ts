@@ -37,9 +37,9 @@ export const create = (user: IUserPost) =>
 export const update = (userId: string, user: IUserPost) =>
   new Promise((res, rej) => {
     try {
-      const index = users.findIndex(({ id }) => userId === id);
-      users[index] = { id: userId, ...user };
-      res(users[index]);
+      const i = users.findIndex(({ id }) => userId === id);
+      users[i] = { id: userId, ...user };
+      res(users[i]);
     } catch (error) {
       rej(error);
     }
@@ -48,9 +48,9 @@ export const update = (userId: string, user: IUserPost) =>
 export const remove = (userId: string) =>
   new Promise((res, rej) => {
     try {
-      const index = users.findIndex(({ id }) => userId === id);
-      users.splice(index, 1);
-      res(users[index]);
+      const i = users.findIndex(({ id }) => userId === id);
+      users.splice(i, 1);
+      res(users[i]);
     } catch (error) {
       rej(error);
     }
