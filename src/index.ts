@@ -10,10 +10,13 @@ import {
   serverError,
 } from "./controllers/userController";
 import { validate as uuidValidate } from "uuid";
+import * as dotenv from 'dotenv';
+dotenv.config();
 
-export const uuidValid = (uuid: string): boolean => uuidValidate(uuid);
+ const uuidValid = (uuid: string): boolean => uuidValidate(uuid);
 
 const PORT = process.env.PORT || 8000;
+ const urlId = /^\/api\/users\/[^\/]+$/;
 
 export const server = createServer(
   (req: IncomingMessage, res: ServerResponse) => {
@@ -22,7 +25,8 @@ export const server = createServer(
 
       if (req.url === "/api/users" && !id && req.method === "GET") {
         getUsers(req, res);
-      } else if (req.url === "/api/users" && id && req.method === "GET") {
+		} else if (req.url.match(urlId) && id && req.method === "GET") {
+			console.log(id)
         const valide = uuidValid(id);
         if (valide) {
           getUserId(req, res, id);
@@ -31,14 +35,14 @@ export const server = createServer(
         }
       } else if (req.url === "/api/users" && req.method === "POST") {
         createUser(req, res);
-      } else if (req.url === "/api/users" && id && req.method === "PUT") {
+      } else if (req.url.match(urlId) && id && req.method === "PUT") {
         const valide = uuidValid(id);
         if (valide) {
           updateUser(req, res, id);
         } else {
           errorValidId(req, res);
         }
-      } else if (req.url === "/api/users" && id && req.method === "DELETE") {
+      } else if (req.url.match(urlId) && id && req.method === "DELETE") {
         const valide = uuidValid(id);
         if (valide) {
           deleteUser(req, res, id);
