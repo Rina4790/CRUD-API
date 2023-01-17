@@ -7,15 +7,15 @@ Production mode:   npm run start:prod
 
 - to get all persons:<br/>
 'GET'<br/>
-http://localhost:8000/api/users
+http://localhost:5000/api/users
 
 - to get person by id:<br/>
 'GET'<br/>
-http://localhost:8000/api/users/e2a737eb-91e4-4ed1-a0df-db664579780d  - for example
+http://localhost:5000/api/users/e2a737eb-91e4-4ed1-a0df-db664579780d  - for example
 
 - to create record about new user and store it in database:<br/>
 'POST'<br/>
-http://localhost:8000/api/users<br/>
+http://localhost:5000/api/users<br/>
 and body in JSON:<br/>
 	{<br/>
     	"username": "Rina",<br/>
@@ -25,7 +25,7 @@ and body in JSON:<br/>
 
 - to update existing user:<br/>
 'PUT'<br/>
-http://localhost:8000/api/users/e2a737eb-91e4-4ed1-a0df-db664579780d  - for example<br/>
+http://localhost:5000/api/users/e2a737eb-91e4-4ed1-a0df-db664579780d  - for example<br/>
 and body in JSON:<br/>
 {<br/>
     "username": "Rina",<br/>
@@ -35,7 +35,7 @@ and body in JSON:<br/>
 
 - to delete existing user from database:<br/>
 'DELETE'<br/>
-http://localhost:8000/api/users/e2a737eb-91e4-4ed1-a0df-db664579780d  - for example<br/>
+http://localhost:5000/api/users/e2a737eb-91e4-4ed1-a0df-db664579780d  - for example<br/>
 
   ***  
 
